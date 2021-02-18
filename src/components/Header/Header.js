@@ -6,6 +6,9 @@ const authenticatedOptions = (
   <Fragment>
     <Nav.Link href="#change-password">Change Password</Nav.Link>
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
+    <Nav.Link href="#journal/create">Create Journal Entries</Nav.Link>
+    <Nav.Link href="#journals">All Your Journal Entries</Nav.Link>
+    <Nav.Link href="#journal/journalId">Find A Journal Entry</Nav.Link>
   </Fragment>
 )
 

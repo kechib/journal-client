@@ -10,11 +10,17 @@ import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 
+// importing Journal components
+import JournalCreate from './components/Journals/JournalCreate'
+import JournalIndex from './components/Journals/JournalIndex'
+import JournalShow from './components/Journals/JournalShow'
+
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
       user: null,
+      journal: null,
       msgAlerts: []
     }
   }
@@ -22,6 +28,14 @@ class App extends Component {
   setUser = user => this.setState({ user })
 
   clearUser = () => this.setState({ user: null })
+
+  setJournal = journal => this.setState({ journal })
+
+  // Combining setUser and setJournal to avoid rendering twice and not having
+  // the journal data ready.
+  setUserJournal = data => this.setState({ user: data.user, journal: data.journal })
+
+clearJournal = () => this.setState({ journal: null })
 
   deleteAlert = (id) => {
     this.setState((state) => {
@@ -37,11 +51,11 @@ class App extends Component {
   }
 
   render () {
-    const { msgAlerts, user } = this.state
+    const { msgAlerts, user, journal } = this.state
 
     return (
       <Fragment>
-        <Header user={user} />
+        <Header user={user} journal={journal}/>
         {msgAlerts.map(msgAlert => (
           <AutoDismissAlert
             key={msgAlert.id}
@@ -62,9 +76,20 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/change-password' render={() => (
+          <AuthenticatedRoute user={user} path='/change-pw' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
+          {/* Journal Routes */}
+          <AuthenticatedRoute user={user} path='/journal/create' render={() => (
+            <JournalCreate msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/journals/' render={() => (
+            <JournalIndex msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/journals/:journalId' render={() => (
+            <JournalShow msgAlert={this.msgAlert} user={user} journal={journal}/>
+          )} />
+
         </main>
       </Fragment>
     )
