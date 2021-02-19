@@ -1,25 +1,22 @@
 import React, { Component, Fragment } from 'react'
-import 'emoji-mart/css/emoji-mart.css'
-import { Picker } from 'emoji-mart'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
-import { createJournal } from '../../api/journals'
+import { updateJournal } from '../../api/journals'
 import JournalForm from './JournalForm'
 
-class JournalCreate extends Component {
+class JournalEdit extends Component {
   constructor (props) {
     super(props)
 
-    // initially our journals title, content, and feeling will be empty until they are filled in
+    // initially our journals title and director will be empty until they are filled in
     this.state = {
       journal: {
         title: '',
         content: '',
         feeling: ''
-
       },
       // createdId will be null, until we successfully create a journal
-      created: false
+      updated: null
     }
   }
 
@@ -28,35 +25,27 @@ class JournalCreate extends Component {
 
     const { user, msgAlert } = this.props
     const { journal } = this.state
-    console.log('this is the user', user)
+    // console.log(match.params)
     // create a journal, pass it the journal data and the user for its token
-    createJournal(journal, user)
+
+    updateJournal(journal, user)
       // set the createdId to the id of the journal we just created
-      // .then(res => this.setState({ createdId: res.data.journal._id }))
       .then(res => {
-        this.setState({ created: true })
+        this.setState({ updated: res.data.journal })
         // pass the response to the next .then so we can show the title
         return res
       })
       .then(res => msgAlert({
-        heading: 'Created Journal Successfully',
-        message: `Journal has been created successfully. You a definitely ${res.data.journal.feeling}!`,
+        heading: 'Journals Successfully Updated',
+        message: 'Journals has been successfully updated.',
         variant: 'success'
       }))
       .catch(error => {
-        if (error.response.status === 422) {
-          msgAlert({
-            heading: 'Failed to Create Journal',
-            message: 'A user can not have more than 1 journal',
-            variant: 'danger'
-          })
-        } else {
-          msgAlert({
-            heading: 'Failed to Create Journal',
-            message: 'Could not create journal with error: ' + error.message,
-            variant: 'danger'
-          })
-        }
+        msgAlert({
+          heading: 'Failed to Create Journals',
+          message: 'Could not create journal with error: ' + error.message,
+          variant: 'danger'
+        })
       })
   }
 
@@ -67,9 +56,8 @@ class JournalCreate extends Component {
     // we must call event.persist
     event.persist()
 
-    // change the state
     this.setState(state => {
-      // return our state changge
+      // return our state change
       return {
         // set the journal state, to what it used to be (...state.journal)
         // but replace the property with `name` to its current `value`
@@ -79,37 +67,26 @@ class JournalCreate extends Component {
     })
   }
 
-  addEmoji = event => {
-    const emoji = event.native
-    this.setState({
-      feeling: this.state.feeling + emoji
-    })
-  }
-
   render () {
     // destructure our journal and createdId state
-    const { journal, created } = this.state
-
+    const { journal, updated } = this.state
     // if the journal has been created and we set its id
-    if (created) {
+    if (updated) {
       // redirect to the journals show page
-      return <Redirect to={`/journals/${journal.title}`} />
+      return <Redirect to={`/journals/${journal.id}`} />
     }
 
     return (
       <Fragment>
-        <h3>Create A Journal Entry</h3>
-
+        <h3>Edit Journals</h3>
         <JournalForm
           journal={journal}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-          addEmoji={this.addEmoji}
         />
-        <Picker onSelect={this.addEmoji} />
       </Fragment>
     )
   }
 }
 
-export default JournalCreate
+export default withRouter(JournalEdit)

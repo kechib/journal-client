@@ -14,6 +14,7 @@ import ChangePassword from './components/ChangePassword/ChangePassword'
 import JournalCreate from './components/Journals/JournalCreate'
 import JournalIndex from './components/Journals/JournalIndex'
 import JournalShow from './components/Journals/JournalShow'
+import JournalEdit from './components/Journals/JournalEdit'
 
 class App extends Component {
   constructor (props) {
@@ -80,14 +81,17 @@ clearJournal = () => this.setState({ journal: null })
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
           {/* Journal Routes */}
-          <AuthenticatedRoute user={user} path='/journal/create' render={() => (
-            <JournalCreate msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} path='/journals-create/' render={() => (
+            <JournalCreate msgAlert={this.msgAlert} setUserJournal={this.setUserJournal}/>
           )} />
-          <AuthenticatedRoute user={user} exact path='/journals/' render={() => (
-            <JournalIndex msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} path='/journals/' render={() => (
+            <JournalIndex msgAlert={this.msgAlert} user={user} setUserJournal={this.setUserJournal} />
           )} />
-          <AuthenticatedRoute user={user} path='/journals/:journalId' render={() => (
-            <JournalShow msgAlert={this.msgAlert} user={user} journal={journal}/>
+          <AuthenticatedRoute user={user} path='/journals/:journalId/' render={() => (
+            <JournalShow msgAlert={this.msgAlert} user={user} clearJournal={this.clearJournal} />
+          )} />
+          <AuthenticatedRoute user={user} path="/journals/:id/" render={() => (
+            <JournalEdit msgAlert={this.msgAlert} user={user} setUserJournal={this.setUserJournal}/>
           )} />
 
         </main>

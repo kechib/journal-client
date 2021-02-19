@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-const JournalForm = ({ journal, handleSubmit, handleChange, addEmoji }) => (
+const JournalForm = ({ journal, handleSubmit, handleChange, addemoji }) => (
   <Form className="showJournal"
     onSubmit={handleSubmit}>
     <Form.Group>
@@ -33,7 +33,7 @@ const JournalForm = ({ journal, handleSubmit, handleChange, addEmoji }) => (
         name='feeling'
         value={journal.feeling}
         onChange={handleChange}
-        addEmoji={this.addEmoji}
+        addemoji={this.addemoji}
       />
       <Button className='primary' variant="primary" type="submit">
         Submit

@@ -2,6 +2,9 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 export const createJournal = (user, journal) => {
+  console.log('journal is', journal)
+  console.log('user is', user)
+  console.log('token is', user.token)
   return axios({
     url: apiUrl + '/journals/',
     method: 'POST',
@@ -13,6 +16,7 @@ export const createJournal = (user, journal) => {
 }
 
 export const indexJournals = (user) => {
+  console.log('user.token is ', user.token)
   return axios({
     url: apiUrl + '/journals/',
     method: 'GET',
@@ -22,9 +26,12 @@ export const indexJournals = (user) => {
   })
 }
 
-export const showJournal = (journalId, user, journal) => {
+export const showJournal = (user, journalId) => {
+  // console.log('journalId is ', journalId)
+  // console.log('user.token is ', user.token)
+
   return axios({
-    url: apiUrl + '/journals/' + journalId,
+    url: apiUrl + '/journals/' + journalId + '/',
     method: 'GET',
     headers: {
       'Authorization': `Token ${user.token}`
@@ -33,8 +40,9 @@ export const showJournal = (journalId, user, journal) => {
 }
 
 export const updateJournal = (user, journal) => {
+  console.log('user is', user)
   return axios({
-    url: apiUrl + '/journal/',
+    url: apiUrl + '/journals/',
     method: 'PATCH',
     headers: {
       'Authorization': `Token ${user.token}`
@@ -43,9 +51,9 @@ export const updateJournal = (user, journal) => {
   })
 }
 
-export const deleteJournal = user => {
+export const deleteJournal = (user, journalId) => {
   return axios({
-    url: apiUrl + '/journal/',
+    url: apiUrl + '/journals/' + journalId,
     method: 'DELETE',
     headers: {
       'Authorization': `Token ${user.token}`

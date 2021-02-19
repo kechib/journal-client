@@ -27,6 +27,7 @@ class JournalShow extends Component {
     showJournal(user, match.params.journalId)
       // set the journals state, to the journals we got back in the response's data
       .then(res => this.setState({ journal: res.data.journal }))
+
       .then(() => msgAlert({
         heading: 'Showing Journal Successfully',
         message: 'The journal entry is now displayed.',
@@ -66,7 +67,6 @@ class JournalShow extends Component {
   render () {
     let journalJsx
     const { journal, deleted } = this.state
-    // const { user } = this.props
 
     // if we don't have a journals yet
     if (!journal) {
@@ -91,7 +91,7 @@ class JournalShow extends Component {
           <p>Feeling:{journal.feeling}</p>
           <button onClick={this.deleteJournal}>Delete Journal</button>
           <button>
-            <Link to={`/journal/edit/${journal._id}`}>Update Journal</Link>
+            <Link to={'/journal/:id/'}>Update Journal</Link>
           </button>
         </Fragment>
       )
@@ -99,7 +99,7 @@ class JournalShow extends Component {
     return (
       <Fragment>
         <h2>Show Journals Page</h2>
-        {deleted ? <Redirect to="/journals"/> : journalJsx}
+        {deleted ? <Redirect to="/journals/:journalId/"/> : journalJsx}
       </Fragment>
     )
   }

@@ -51,7 +51,7 @@ class JournalIndex extends Component {
     }
 
     const journalsJsx = journals.map(journal => (
-      <Link to={`/journals/${journal.title}`} key={journal._id}>
+      <Link to={`/journals/${journal.id}`} key={journal.id}>
         <Button className="w-100" variant="primary">
           {journal.title}
         </Button>
