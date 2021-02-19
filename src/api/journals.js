@@ -4,7 +4,6 @@ import axios from 'axios'
 export const createJournal = (user, journal) => {
   console.log('journal is', journal)
   console.log('user is', user)
-  console.log('token is', user.token)
   return axios({
     url: apiUrl + '/journals/',
     method: 'POST',
@@ -39,10 +38,10 @@ export const showJournal = (user, journalId) => {
   })
 }
 
-export const updateJournal = (user, journal) => {
+export const updateJournal = (user, journal, id) => {
   console.log('user is', user)
   return axios({
-    url: apiUrl + '/journals/',
+    url: apiUrl + '/journals/' + id + '/',
     method: 'PATCH',
     headers: {
       'Authorization': `Token ${user.token}`

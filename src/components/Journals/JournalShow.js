@@ -43,10 +43,10 @@ class JournalShow extends Component {
   }
 
   handleDelete = event => {
-    const { user, msgAlert, clearJournal } = this.props
-
+    const { user, msgAlert, clearJournal, showjournal } = this.props
+    const { id } = showjournal
     // make a delete axios request
-    deleteJournal(user)
+    deleteJournal(user, id)
       // set the deleted variable to true, to redirect to the journals page in render
       .then(() => this.setState({ deleted: true }))
       .then(() => msgAlert({
@@ -66,10 +66,11 @@ class JournalShow extends Component {
 
   render () {
     let journalJsx
-    const { journal, deleted } = this.state
+    const { deleted } = this.state
+    const { showjournal } = this.props
 
     // if we don't have a journals yet
-    if (!journal) {
+    if (!showjournal) {
       // A Spinner is just a nice loading message we get from react bootstrap
       return (
         <Spinner animation="border" role="status">
@@ -86,12 +87,12 @@ class JournalShow extends Component {
       // if we have our journal
       journalJsx = (
         <Fragment>
-          <h3>Title:{journal.title}</h3>
-          <p>Your Entry: {journal.content}</p>
-          <p>Feeling:{journal.feeling}</p>
-          <button onClick={this.deleteJournal}>Delete Journal</button>
+          <h3>Title:{showjournal.title}</h3>
+          <p>Your Entry: {showjournal.content}</p>
+          <p>Feeling:{showjournal.feeling}</p>
+          <button onClick={this.handleDelete}>Delete Journal</button>
           <button>
-            <Link to={'/journal/:id/'}>Update Journal</Link>
+            <Link to={'/journals-edit/'}>Update Journal</Link>
           </button>
         </Fragment>
       )

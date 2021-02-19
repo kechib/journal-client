@@ -27,14 +27,15 @@ class JournalCreate extends Component {
     event.preventDefault()
 
     const { user, msgAlert } = this.props
+    console.log('props is', this.props)
     const { journal } = this.state
-    console.log('this is the user', user)
     // create a journal, pass it the journal data and the user for its token
-    createJournal(journal, user)
+    createJournal(user, journal)
       // set the createdId to the id of the journal we just created
       // .then(res => this.setState({ createdId: res.data.journal._id }))
       .then(res => {
-        this.setState({ created: true })
+        console.log(res)
+        this.setState({ created: true, journal: res.data.journal })
         // pass the response to the next .then so we can show the title
         return res
       })
@@ -93,7 +94,7 @@ class JournalCreate extends Component {
     // if the journal has been created and we set its id
     if (created) {
       // redirect to the journals show page
-      return <Redirect to={`/journals/${journal.title}`} />
+      return <Redirect to={`/journals/${journal.id}`} />
     }
 
     return (

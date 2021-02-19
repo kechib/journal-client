@@ -22,16 +22,18 @@ class JournalEdit extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-
-    const { user, msgAlert } = this.props
+    console.log(this.state)
+    console.log(this.props)
+    const { user, msgAlert, editjournal } = this.props
+    const { id } = editjournal
     const { journal } = this.state
     // console.log(match.params)
     // create a journal, pass it the journal data and the user for its token
-
-    updateJournal(journal, user)
+    updateJournal(user, journal, id)
       // set the createdId to the id of the journal we just created
       .then(res => {
-        this.setState({ updated: res.data.journal })
+        console.log(res.data)
+        this.setState({ journal: res.data })
         // pass the response to the next .then so we can show the title
         return res
       })

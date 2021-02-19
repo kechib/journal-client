@@ -38,7 +38,7 @@ class JournalIndex extends Component {
   render () {
     // destructure our journals state
     const { journals } = this.state
-
+    const { setJournal } = this.props
     // if we haven't fetched any journals yet from the API
     if (!journals) {
       // A Spinner is just a nice loading message we get from react bootstrap
@@ -51,8 +51,9 @@ class JournalIndex extends Component {
     }
 
     const journalsJsx = journals.map(journal => (
-      <Link to={`/journals/${journal.id}`} key={journal.id}>
-        <Button className="w-100" variant="primary">
+      <Link to={`/journals/${journal.id}/`} key={journal.id}>
+        {/* evry time you click its going to set the user journal to what you click on */}
+        <Button onClick={() => setJournal(journal)} className="w-100" variant="primary">
           {journal.title}
         </Button>
       </Link>
