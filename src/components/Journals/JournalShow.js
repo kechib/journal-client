@@ -4,7 +4,8 @@ import React, { Component, Fragment } from 'react'
 import { withRouter, Redirect, Link } from 'react-router-dom'
 // import Button from 'react-bootstrap/Button'
 // import Card from 'react-bootstrap/Card'
-
+// import Iframe from 'react-iframe'
+import SpotifyPlayer from 'react-spotify-web-playback'
 import Spinner from 'react-bootstrap/Spinner'
 import { showJournal, deleteJournal } from '../../api/journals'
 
@@ -89,7 +90,8 @@ class JournalShow extends Component {
         <Fragment>
           <h3>Title:{showjournal.title}</h3>
           <p>Your Entry: {showjournal.content}</p>
-          <p>Feeling:{showjournal.feeling}</p>
+          <p>Feeling:<SpotifyPlayer token="BQAT9QqJO_o_moZaQ2EzI2qObDLvg9r0H1dXpscHcUmdCbE9vZKbn0opWuUZz4IuN7S3wK1wCXIJHbNbqDgTQvhmqfmFx7XRMtd1qyMCnrVdtWUrLwbb8YHsHWOImWl-nk6SgHvpBypuAn01pl7CdZ0b29XS3-DLxpaXs35hfaTr9XFWxhG5snc" uris = {[showjournal.feeling]}
+          /></p>
           <button onClick={this.handleDelete}>Delete Journal</button>
           <button>
             <Link to={'/journals-edit/'}>Update Journal</Link>

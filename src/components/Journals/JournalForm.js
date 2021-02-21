@@ -1,8 +1,8 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import DateTimeField from 'react-bootstrap-datetimepicker'
-const JournalForm = ({ journal, handleSubmit, handleChange, handleTimeChange }) => (
+// import DatePicker from 'react-datepicker'
+const JournalForm = ({ journal, createdDate, handleSubmit, handleChange, handleTimeChange }) => (
   <Form className="showJournal"
     onSubmit={handleSubmit}>
     <Form.Group>
@@ -38,12 +38,14 @@ const JournalForm = ({ journal, handleSubmit, handleChange, handleTimeChange }) 
     </Form.Group>
     <Form.Group>
       <Form.Label>Created</Form.Label>
-      <DateTimeField
-        // placeholder=""
+      <Form.Control
+        placeholder="MM/dd/yyyy"
         // This name should line up with the state we want to change
         name='created'
         value={journal.created}
-        onChange={handleTimeChange}
+        onChange={handleChange}
+        // selected={createdDate}
+        // dateFormat="MM/dd/yyyy"
       />
       <Button className='primary' variant="primary" type="submit">
         Submit

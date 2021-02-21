@@ -19,7 +19,9 @@ class JournalCreate extends Component {
 
       },
       // createdId will be null, until we successfully create a journal
-      created: false
+      created: false,
+      createdDate: new Date(),
+      setCreatedDate: new Date()
     }
   }
 
@@ -79,50 +81,35 @@ class JournalCreate extends Component {
       }
     })
   }
-
-  getInitialState = function () {
-    const value = new Date().toISOString()
-    return {
-      value: value
-    }
+  handleTimeChange = date => {
+    const { setCreatedDate } = this.state
+    this.setState(setCreatedDate(date))
   }
 
-    handleTimeChange = function (value, formattedValue) {
-      this.setState({
-        value: value, // ISO String, ex: "2016-11-19T12:00:00.000Z"
-        formattedValue: formattedValue // Formatted String, ex: "11/19/2016"
-      })
-    }
-    componentDidUpdate = function () {
-    // Access ISO String and formatted values from the DOM.
-      const hiddenInputElement = document.getElementById('example-datepicker')
-      console.log(hiddenInputElement.value) // ISO String, ex: "2016-11-19T12:00:00.000Z"
-      console.log(hiddenInputElement.getAttribute('data-formattedvalue')) // Formatted String, ex: "11/19/2016"
-    }
-
-    render () {
+  render () {
     // destructure our journal and createdId state
-      const { journal, created } = this.state
+    const { journal, created } = this.state
 
-      // if the journal has been created and we set its id
-      if (created) {
+    // if the journal has been created and we set its id
+    if (created) {
       // redirect to the journals show page
-        return <Redirect to={`/journals/${journal.id}`} />
-      }
-
-      return (
-        <Fragment>
-          <h3>Create A Journal Entry</h3>
-
-          <JournalForm
-            journal={journal}
-            handleChange={this.handleChange}
-            handleTimeChange={this.handleTimeChange}
-            handleSubmit={this.handleSubmit}
-          />
-        </Fragment>
-      )
+      return <Redirect to={`/journals/${journal.id}`} />
     }
+
+    return (
+      <Fragment>
+        <h3>Create A Journal Entry</h3>
+
+        <JournalForm
+          journal={journal}
+          handleChange={this.handleChange}
+          handleTimeChange={this.handleTimeChange}
+          selected={ this.createdDate}
+          handleSubmit={this.handleSubmit}
+        />
+      </Fragment>
+    )
+  }
 }
 
 export default JournalCreate

@@ -22,9 +22,11 @@
     "raf": "3.4.0",
     "react": "^16.4.2",
     "react-bootstrap": "^1.0.0-beta.5",
-    "react-bootstrap-datetimepicker": "0.0.22",
+    "react-datepicker": "^3.5.0",
     "react-dom": "^16.4.2",
+    "react-iframe": "^1.8.0",
     "react-router-dom": "^4.3.1",
+    "react-spotify-web-playback": "^0.8.1",
     "resolve": "1.6.0",
     "url-loader": "0.6.2",
     "uuid": "^7.0.3"
