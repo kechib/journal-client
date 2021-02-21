@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react'
-import 'emoji-mart/css/emoji-mart.css'
-import { Picker } from 'emoji-mart'
-import { Redirect } from 'react-router-dom'
 
+import { Redirect } from 'react-router-dom'
 import { createJournal } from '../../api/journals'
+// import JournalForm from './JournalForm'
 import JournalForm from './JournalForm'
 
 class JournalCreate extends Component {
@@ -15,7 +14,8 @@ class JournalCreate extends Component {
       journal: {
         title: '',
         content: '',
-        feeling: ''
+        feeling: '',
+        created: ''
 
       },
       // createdId will be null, until we successfully create a journal
@@ -80,37 +80,49 @@ class JournalCreate extends Component {
     })
   }
 
-  addEmoji = event => {
-    const emoji = event.native
-    this.setState({
-      feeling: this.state.feeling + emoji
-    })
+  getInitialState = function () {
+    const value = new Date().toISOString()
+    return {
+      value: value
+    }
   }
 
-  render () {
-    // destructure our journal and createdId state
-    const { journal, created } = this.state
-
-    // if the journal has been created and we set its id
-    if (created) {
-      // redirect to the journals show page
-      return <Redirect to={`/journals/${journal.id}`} />
+    handleTimeChange = function (value, formattedValue) {
+      this.setState({
+        value: value, // ISO String, ex: "2016-11-19T12:00:00.000Z"
+        formattedValue: formattedValue // Formatted String, ex: "11/19/2016"
+      })
+    }
+    componentDidUpdate = function () {
+    // Access ISO String and formatted values from the DOM.
+      const hiddenInputElement = document.getElementById('example-datepicker')
+      console.log(hiddenInputElement.value) // ISO String, ex: "2016-11-19T12:00:00.000Z"
+      console.log(hiddenInputElement.getAttribute('data-formattedvalue')) // Formatted String, ex: "11/19/2016"
     }
 
-    return (
-      <Fragment>
-        <h3>Create A Journal Entry</h3>
+    render () {
+    // destructure our journal and createdId state
+      const { journal, created } = this.state
 
-        <JournalForm
-          journal={journal}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          addEmoji={this.addEmoji}
-        />
-        <Picker onSelect={this.addEmoji} />
-      </Fragment>
-    )
-  }
+      // if the journal has been created and we set its id
+      if (created) {
+      // redirect to the journals show page
+        return <Redirect to={`/journals/${journal.id}`} />
+      }
+
+      return (
+        <Fragment>
+          <h3>Create A Journal Entry</h3>
+
+          <JournalForm
+            journal={journal}
+            handleChange={this.handleChange}
+            handleTimeChange={this.handleTimeChange}
+            handleSubmit={this.handleSubmit}
+          />
+        </Fragment>
+      )
+    }
 }
 
 export default JournalCreate

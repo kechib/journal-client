@@ -1,7 +1,8 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-const JournalForm = ({ journal, handleSubmit, handleChange, addemoji }) => (
+import DateTimeField from 'react-bootstrap-datetimepicker'
+const JournalForm = ({ journal, handleSubmit, handleChange, handleTimeChange }) => (
   <Form className="showJournal"
     onSubmit={handleSubmit}>
     <Form.Group>
@@ -33,7 +34,16 @@ const JournalForm = ({ journal, handleSubmit, handleChange, addemoji }) => (
         name='feeling'
         value={journal.feeling}
         onChange={handleChange}
-        addemoji={this.addemoji}
+      />
+    </Form.Group>
+    <Form.Group>
+      <Form.Label>Created</Form.Label>
+      <DateTimeField
+        // placeholder=""
+        // This name should line up with the state we want to change
+        name='created'
+        value={journal.created}
+        onChange={handleTimeChange}
       />
       <Button className='primary' variant="primary" type="submit">
         Submit
