@@ -1,0 +1,195 @@
+/* font and color palette */
+
+/* include the same shapes included in the background atop the content of the page, with a semi-translucent white
+this softens the color of the shapes, but most prominently shows the shapes as if continuing on the underlying content
+*/
+/* for both panels
+display the content in a single column layout
+*/
+/* styles shared by the halves' elements */
+/* style the anchor links nesting the social platforms in a circle */
+/* on hover and on focus switch the color of the links making up the social icons */
+/* include a semi-transparent border at the bottom of the anchor link elements which are direct children of the parent
+this excludes the social icons */
+/* display the input elements atop one another */
+/* widen the input elements to cover a sizeable portion of the panel */
+/* style the buttons to sign in/sign up to have considerable white space _around_ the text */
+/*
+on smaller viewports position the panel atop one another
+expand the main panel to cover the entirety of the viewport
+*/
+/* expand the first half to cover twice the space of the second half */
+/*
+on smaller viewports remove the border radius
+*/
+/*
+on smaller viewports remove the border radius
+*/
+
+	$bg: #FFFFFF;
+	$text: #697a79;
+  $theme-two:#7699f5;
+  $theme: #625de0;
+  @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap');
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+body {
+	background-size: 300px, 380px, 100%;
+	font-family: 'Montserrat', sans-serif;
+	color: $text;
+	display: flex;
+	justify-content: center;
+	padding: 1rem 0;
+	&:after {
+		position: absolute;
+		content: '';
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+		// background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g transform="scale(0.8 0.8) translate(5 5)"><circle cx="50" cy="50" r="50" fill="%23ffffff22"/></g></svg>'), url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g transform="scale(0.8 0.8) translate(5 5)"><path d="M 0 80 l 100 -80 v 100 z" fill="%23ffffff22"/></g></svg>');" background-repeat: no-repeat;
+		background-position: bottom -150px left -70px, top -120px right -100px;
+		background-size: 300px, 380px;
+	}
+}
+.Home {
+	max-width: 800px;
+	width: 90vw;
+	min-height: 600px;
+	background-color:  $theme-two;
+	border-radius: 20px;
+	box-shadow: 0 2px 5px -6px $text,0 0 30px -50px $text;
+	display: flex;
+}
+.Panel {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	line-height: 2;
+	position: relative;
+	overflow-x: hidden;
+	h2 {
+		font-size: 1.9rem;
+		text-transform: capitalize;
+		margin-bottom: 1rem;
+	}
+	p {
+		margin: 1rem 0;
+		max-width: 25ch;
+		font-size: 0.95rem;
+		line-height: 1.5;
+		font-weight: 300;
+		text-align: center;
+	}
+	a {
+		color: inherit;
+		font-family: inherit;
+		text-decoration: none;
+		margin: 1rem 1rem;
+	}
+	button {
+		color: inherit;
+		font-family: inherit;
+		background: none;
+		border: 1px solid currentColor;
+		border-radius: 50px;
+		padding: 0.85rem 2.75rem;
+		margin: 2rem 0;
+		text-transform: uppercase;
+		font-size: 0.8rem;
+		letter-spacing: 0.1rem;
+	}
+	.Social {
+		a {
+			display: inline-block;
+			font-weight: 900;
+			width: 50px;
+			height: 50px;
+			text-align: center;
+			line-height: 50px;
+			border-radius: 50%;
+			border: 1px solid currentColor;
+			&:hover {
+				background: $text;
+				color: $theme-two;
+			}
+			&:focus {
+				background: $text;
+				color: $theme-two;
+			}
+		}
+	}
+	>a {
+		position: relative;
+		&:after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			bottom: 0;
+			left: 0;
+			border-bottom: 1px dashed currentColor;
+			opacity: 0.4;
+		}
+	}
+	form {
+		display: flex;
+		flex-direction: column;
+		input {
+			margin: 0.5rem 0;
+			width: 200px;
+			padding: 1rem 0.75rem;
+			background: $bg;
+			border: none;
+			color: inherit;
+			font-family: inherit;
+			&::placeholder {
+				opacity: 0.8;
+			}
+		}
+	}
+}
+.FormPanel {
+	flex-grow: 2;
+	border-radius: inherit;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	button {
+		background: $theme;
+		color: $theme-two;
+	}
+}
+.ActionPanel {
+	background: $theme;
+	color: $theme-two;
+	padding: 2rem;
+	flex-grow: 1;
+	border-radius: inherit;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+@media (max-width: 650px) {
+	body {
+		padding: 0;
+	}
+	.App {
+		flex-direction: column;
+		border-radius: 0;
+		width: 100vw;
+		height: 100%;
+		margin: 0;
+		box-shadow: none;
+	}
+	.FormPanel {
+		border-radius: 0;
+	}
+	.ActionPanel {
+		border-radius: 0;
+	}
+}
