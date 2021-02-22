@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-
+import './JournalCreate.scss'
 import { Redirect } from 'react-router-dom'
 import { createJournal } from '../../api/journals'
 // import JournalForm from './JournalForm'
@@ -98,15 +98,18 @@ class JournalCreate extends Component {
 
     return (
       <Fragment>
-        <h3>Create A Journal Entry</h3>
+        <div className="create">
+          <h3>Create A Journal Entry</h3>
 
-        <JournalForm
-          journal={journal}
-          handleChange={this.handleChange}
-          handleTimeChange={this.handleTimeChange}
-          selected={ this.createdDate}
-          handleSubmit={this.handleSubmit}
-        />
+          <JournalForm
+            journal={journal}
+            handleChange={this.handleChange}
+            handleTimeChange={this.handleTimeChange}
+            selected={ this.createdDate}
+            handleSubmit={this.handleSubmit}
+          />
+        </div>
+
       </Fragment>
     )
   }

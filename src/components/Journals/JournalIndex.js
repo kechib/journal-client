@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-
+// import Moment from 'moment'
 import Spinner from 'react-bootstrap/Spinner'
 import './JournalIndex.scss'
 import Card from 'react-bootstrap/Card'
@@ -53,11 +53,12 @@ class JournalIndex extends Component {
     }
 
     const journalsJsx = journals.map(journal => (
-      <Link to={`/journals/${journal.id}/`} key={journal.id}>
-        <div className="index">
-          <div className="main-content">
-            <h1> Journal Entries<small>Hover on any notebook...</small></h1>
 
+      <Link to={`/journals/${journal.id}/`} key={journal.id}>
+
+        <div className="index">
+
+          <div className="main-content">
             {/* evry time you click its going to set the user journal to what you click on */}
             <div className="moleskine-wrapper">
               <div className="moleskine-notebook">
@@ -69,19 +70,24 @@ class JournalIndex extends Component {
                 <div className="notebook-page ruled"></div>
               </div>
 
-              <div></div>
-              <h4>{journal.created}</h4>
+              <div>
+
+                <h4>{journal.created}</h4>
+
+              </div>
             </div>
 
           </div>
         </div>
+
       </Link>
+
     ))
 
     return (
 
       <Card>
-        <Card.Title>See All Your Entries</Card.Title>
+        <Card.Title><h1>See All Your Journal Entries<small>Hover on any notebook...</small></h1></Card.Title>
         <Card.Body>{journalsJsx}</Card.Body>
       </Card>
 

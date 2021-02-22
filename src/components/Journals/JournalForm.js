@@ -17,7 +17,7 @@ const JournalForm = ({ journal, createdDate, handleSubmit, handleChange, handleT
     </Form.Group>
     <Form.Group>
       <Form.Label>Content</Form.Label>
-      <Form.Control
+      <Form.Control as="textarea" rows={3}
         placeholder='A Brief Desciption Of Your Day'
         // This name should line up with the state we want to change
         name='content'

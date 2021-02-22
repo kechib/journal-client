@@ -31,6 +31,8 @@ on smaller viewports remove the border radius
   $theme-two:#824fc1;
   $theme: #53d0fb;
 	$color-blue: #2e95aa;
+	$primary: #625de0;
+
   @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap');
 
@@ -41,7 +43,7 @@ on smaller viewports remove the border radius
 
 }
 body {
-	background: url('https://files.123freevectors.com/wp-content/original/132928-abstract-geometric-purple-and-white-background.jpg'), $bg;
+	background: url('https://i.pinimg.com/originals/ba/0b/2b/ba0b2b18f6c825c9018e8cd99e3e4ba9.jpg'), $bg;
 	background-repeat: no-repeat;
 	height: 100%;
   background-position: center;

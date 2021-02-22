@@ -1,0 +1,40 @@
+$zig: #B6B5EB;
+$zag: #AB78AB;
+$bg: transparent;
+$page-bg: lighten($zag, 35);
+
+.create {
+  background: #B993D6;
+    background: -webkit-linear-gradient(to left, #B993D6 , #8CA6DB);
+    background: linear-gradient(to left, #B993D6 , #8CA6DB);
+  width: 700px;
+  height: 600px;
+  background: url(https://image.freepik.com/free-vector/purple-watercolor-abstract-texture-background_65186-824.jpg);
+  background-repeat: no-repeat;
+    background-size: cover;
+  // background-size: 40px;
+  // background-repeat: round;
+  overflow: hidden;
+  resize: both;
+  position: relative;
+  min-width: 150px;
+  min-height: 60px;
+  &::before {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+  }
+  border: 15px solid #824fc1;
+  display: grid;
+  place-items: center;
+  color: #824fc1;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}

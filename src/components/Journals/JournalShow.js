@@ -67,8 +67,9 @@ class JournalShow extends Component {
   }
 
   render () {
+    let journalJsx
     const { deleted, journal } = this.state
-    const { user } = this.props
+    // const { showjournal } = this.props
 
     // if we don't have a journals yet
     if (!journal) {
@@ -84,34 +85,35 @@ class JournalShow extends Component {
     if (deleted) {
       // redirect to the journals index page
       return <Redirect to="/journals/" />
+    } else {
+      journalJsx = (
+        <Fragment>
+          <h2>Show Journals Page</h2>
+          <div className="displayProfile">
+            <Card style={{ width: '18rem' }}>
+              <Card.Body>
+                <Card.Title>
+                  <h3>Title: {journal.title}</h3>
+                </Card.Title>
+                <Card.Text>
+                  <p>Your Entry: {journal.content}</p>
+                  <p>Feeling:<Embed url = {journal.feeling}/></p>
+                </Card.Text>
+                <Button className='primary' variant="primary" onClick={this.handleDelete}>Delete Journal</Button>
+                <Button>
+                  <Link to={'/journals-edit/'}>Update Journal</Link>
+                </Button>
+              </Card.Body>
+            </Card>
+          </div>
+          {/* {deleted ? <Redirect to="/journals/:journalId/"/> : journalJsx} */}
+        </Fragment>
+      )
     }
-    const journalJsx = (
-      <div>
-        <Button className='primary' variant="primary" onClick={this.handleDelete}>Delete Journal</Button>
-        <Button>
-          <Link to={'/journals-edit/'}>Update Journal</Link>
-        </Button>
-      </div>
-    )
-
     return (
       <Fragment>
         <h2>Show Journals Page</h2>
-        <div className="displayProfile">
-          <Card style={{ width: '18rem' }}>
-            <Card.Body>
-              <Card.Title>
-                <h3>Title:{journal.title}</h3>
-              </Card.Title>
-              <Card.Text>
-                <p>Your Entry: {journal.content}</p>
-                <p>Feeling:<Embed url = {journal.feeling}/></p>
-              </Card.Text>
-              { user.id === journal.owner && journalJsx }
-            </Card.Body>
-          </Card>
-        </div>
-        {/* {deleted ? <Redirect to="/journals/:journalId/"/> : journalJsx} */}
+        {deleted ? <Redirect to="/journals/:journalId/"/> : journalJsx}
       </Fragment>
     )
   }
