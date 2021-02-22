@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 // import Form from 'react-bootstrap/Form'
 // import Button from 'react-bootstrap/Button'
 // import $ from 'jquery'
@@ -6,15 +7,17 @@ import '../../App.scss'
 // import SignUp from '../SignUp/SignUp'
 // import SignIn from '../SignIn/SignIn'
 // import Overlay from './Overlay'
+import { signIn } from '../../api/auth'
+import messages from '../AutoDismissAlert/messages'
 
-const { Component } = React
+const { Component, useState } = React
 
 // stateless component for the panel prominently featuring the button to enable the slide function
-const ActionPanel = ({ SignIn, slide }) => {
-  // content to show conditional to the SignIn boolean
-  const heading = SignIn ? 'Hello friend!' : 'Welcome back!'
-  const paragraph = SignIn ? 'Enter your personal details and start your journey with us' : 'To keep connected with us please login with your personal info'
-  const button = SignIn ? 'Sign up!' : 'Sign in!'
+const ActionPanel = ({ signIn, slide }) => {
+  // content to show conditional to the signIn boolean
+  const heading = signIn ? 'Hello friend!' : 'Welcome back!'
+  const paragraph = signIn ? 'Enter your personal details and start your journey with us' : 'To keep connected with us please login with your personal info'
+  const button = signIn ? 'Sign up!' : 'Sign in!'
 
   // render the elements and includ the slide function when pressing the button
   return /* #__PURE__ */(
@@ -25,23 +28,11 @@ const ActionPanel = ({ SignIn, slide }) => {
 }
 
 // stateless component depicting the panel with input elements
-const FormPanel = ({ SignIn }) => {
+const FormPanel = ({ signedIn, msgAlert, history, setUser }) => {
   // heading
-  const heading = SignIn ? 'Sign in' : 'Create account'
+  const heading = signedIn ? 'Sign in' : 'Create account'
 
-  // array for authentications platforms (dead links as a proof of concept)
-  const social = [
-    {
-      href: '#',
-      icon: 'f' },
-
-    {
-      href: '#',
-      icon: 't' },
-
-    {
-      href: '#',
-      icon: 'in' }]
+  const [formState, setFormState] = useState({ email: '', password: '' })
 
   // paragraph shared by both versions of the panel
   const paragraph = 'Or use your email account'
@@ -56,36 +47,50 @@ const FormPanel = ({ SignIn }) => {
       type: 'password',
       placeholder: 'Password' }]
 
-  // if the SignIn boolean directs toward the sign up form, include an additional input in the inputs array, for the name
-  if (!SignIn) {
+  // if the signIn boolean directs toward the sign up form, include an additional input in the inputs array, for the name
+  if (!signedIn) {
     inputs.unshift({
       type: 'text',
       placeholder: 'Name' })
   }
 
-  // link also shared by both versions of the panel
-  const link = {
-    href: '#',
-    text: 'Forgot your password?' }
-
   // button to hypothetically sign in/up
-  const button = SignIn ? 'Sign in' : 'Sign up'
+  const button = signedIn ? 'Sign in' : 'Sign up'
+
+  const onSignIn = event => {
+    // event.preventDefault()
+
+    signIn(formState)
+      .then(res => setUser(res.data.user))
+      .then(() => msgAlert({
+        heading: 'Sign In Success',
+        message: messages.signInSuccess,
+        variant: 'success'
+      }))
+      .then(() => history.push('/'))
+      .catch(error => {
+        setFormState({ email: '', password: '' })
+        msgAlert({
+          heading: 'Sign In Failed with error: ' + error.message,
+          message: messages.signInFailure,
+          variant: 'danger'
+        })
+      })
+  }
 
   // render the specified content in the matching elements
   return /* #__PURE__ */(
     React.createElement('div', { className: 'Panel FormPanel' }, /* #__PURE__ */
       React.createElement('h2', null, heading), /* #__PURE__ */
-      React.createElement('div', { className: 'Social' },
-
-        social.map(({ href, icon }) => /* #__PURE__ */React.createElement('a', { href: href, key: icon }, icon))), /* #__PURE__ */
 
       React.createElement('p', null, paragraph), /* #__PURE__ */
       React.createElement('form', null,
-
-        inputs.map(({ type, placeholder }) => /* #__PURE__ */React.createElement('input', { type: type, key: placeholder, placeholder: placeholder }))), /* #__PURE__ */
-
-      React.createElement('a', { href: link.href }, link.text), /* #__PURE__ */
-      React.createElement('button', null, button)))
+        [
+          React.createElement('input', { onChange: (event) => { setFormState({ ...formState, email: event.target.value }) }, type: 'text', key: 'email', placeholder: 'email' }),
+          React.createElement('input', { onChange: (event) => { setFormState({ ...formState, password: event.target.value }) }, type: 'password', key: 'password', placeholder: 'password' })
+        ]),
+      React.createElement('button', { onClick: () => { onSignIn() }
+      }, button)))
 }
 
 // main component managing the state of the application, detailing the slide function and rendering the necessary components
@@ -103,8 +108,8 @@ class Home extends Component {
     this.slide = this.slide.bind(this)
   }
   slide () {
-    // retrieve the SignIn boolean
-    const { SignIn, transition } = this.state
+    // retrieve the signIn boolean
+    const { signIn, transition } = this.state
 
     // if already transitioning, pre-emptively escape the function
     // else continue applying the slide effect
@@ -133,7 +138,7 @@ class Home extends Component {
       transition: true })
 
     // if signing in slide the form panel to the right, the action panel the other way
-    if (SignIn) {
+    if (signIn) {
       // by an amount equal to the other element's width
       formPanel.style.transform = `translateX(${actionBoundingRect.width}px)`
       actionPanel.style.transform = `translateX(${-formBoundingRect.width}px)`;
@@ -168,11 +173,11 @@ class Home extends Component {
       // remove the transition on the child elements to reposition them on the opposite side of the incoming direciton
       [...actionPanelChildren].forEach(child => {
         child.style.transition = 'none'
-        child.style.transform = `translateX(${SignIn ? -actionBoundingRect.width / 3 : actionBoundingRect.width / 3}%)`
+        child.style.transform = `translateX(${signIn ? -actionBoundingRect.width / 3 : actionBoundingRect.width / 3}%)`
       })
 
       this.setState({
-        SignIn: !SignIn })
+        signIn: !signIn })
 
       clearTimeout(timeoutState)
     }, 350)
@@ -197,7 +202,7 @@ class Home extends Component {
       // ! accessibility concerns
       formPanel.style.transform = 'translate(0)'
       actionPanel.style.transform = 'translate(0)'
-      actionPanel.style.order = SignIn ? -1 : 1
+      actionPanel.style.order = signIn ? -1 : 1
 
       this.setState({
         transition: false })
@@ -209,8 +214,8 @@ class Home extends Component {
   render () {
     return /* #__PURE__ */(
       React.createElement('div', { className: 'Home' }, /* #__PURE__ */
-        React.createElement(FormPanel, { SignIn: this.state.SignIn }), /* #__PURE__ */
-        React.createElement(ActionPanel, { SignIn: this.state.SignIn, slide: this.slide })))
+        React.createElement(FormPanel, { signIn: this.state.signIn }), /* #__PURE__ */
+        React.createElement(ActionPanel, { signIn: this.state.signIn, slide: this.slide })))
   }
 }
 export default Home

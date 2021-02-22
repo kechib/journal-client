@@ -17,20 +17,20 @@ For this project I spent most of my time re-learning react concepts, reviewing p
 2. Create a new branch, `example`, for your work.
 3. Checkout to the `example` branch.
 4. Install dependencies with `npm install`.
-5. Start up client with `npm run start`
+5. Start up client with `npm run start`.
 
 ## User Stories
 - As a user I want to: Sign Up
 - As a user I want to: Sign In
 - As a user I want to: Change my password
 - As a user I want to: Sign Out
-- As a user I want to make a journal entry
--	As a user I want to view a single journal entry
--	As a user I want to view all my journal entries
--	As a user I want to edit an entry I created
--	As a user I want to delete an entry I created
-- As a user I want to find a song from Apple Music to embed
-- As a user I want to play my song
+- As a user I want to: make a journal entry
+-	As a user I want to: view a single journal entry
+-	As a user I want to: view all my journal entries
+-	As a user I want to: edit an entry I created
+-	As a user I want to: delete an entry I created
+- As a user I want to: find a song from Apple Music to embed
+- As a user I want to: play my song
 
 ## Technologies Used
 - React

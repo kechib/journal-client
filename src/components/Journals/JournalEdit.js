@@ -24,12 +24,12 @@ class JournalEdit extends Component {
     event.preventDefault()
     console.log(this.state)
     console.log(this.props)
-    const { user, msgAlert, editjournal } = this.props
-    const { id } = editjournal
+    const { user, match, msgAlert } = this.props
+
     const { journal } = this.state
     // console.log(match.params)
     // create a journal, pass it the journal data and the user for its token
-    updateJournal(user, journal, id)
+    updateJournal(user, journal, match.params.id)
       // set the createdId to the id of the journal we just created
       .then(res => {
         console.log(res.data)
