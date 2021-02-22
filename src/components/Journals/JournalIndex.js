@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import Spinner from 'react-bootstrap/Spinner'
+import './JournalIndex.scss'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import { indexJournals } from '../../api/journals'
@@ -13,7 +14,8 @@ class JournalIndex extends Component {
     // keep track of the journals in our application
     // initially they will be null until we have fetched them from the api
     this.state = {
-      journals: null
+      journals: null,
+      show: true
     }
   }
 
@@ -52,21 +54,37 @@ class JournalIndex extends Component {
 
     const journalsJsx = journals.map(journal => (
       <Link to={`/journals/${journal.id}/`} key={journal.id}>
-        {/* evry time you click its going to set the user journal to what you click on */}
-        <Button onClick={() => setJournal(journal)} className="w-100" variant="primary">
-          {journal.title}
-        </Button>
+        <div className="index">
+          <div className="main-content">
+            <h1> Journal Entries<small>Hover on any notebook...</small></h1>
+
+            {/* evry time you click its going to set the user journal to what you click on */}
+            <div className="moleskine-wrapper">
+              <div className="moleskine-notebook">
+                <div className="notebook-cover blue">
+                  <div className="notebook-skin"><Button onClick={() => setJournal(journal)} className="w-100" variant="primary">
+                    {journal.title}
+                  </Button></div>
+                </div>
+                <div className="notebook-page ruled"></div>
+              </div>
+
+              <div></div>
+              <h4>{journal.created}</h4>
+            </div>
+
+          </div>
+        </div>
       </Link>
     ))
 
     return (
-      <div className="index">
-        <h3>Journal Entries</h3>
-        <Card>
-          <Card.Title>See All Your Entries</Card.Title>
-          <Card.Body>{journalsJsx}</Card.Body>
-        </Card>
-      </div>
+
+      <Card>
+        <Card.Title>See All Your Entries</Card.Title>
+        <Card.Body>{journalsJsx}</Card.Body>
+      </Card>
+
     )
   }
 }

@@ -91,6 +91,9 @@ clearJournal = () => this.setState({ journal: null })
           <AuthenticatedRoute user={user} path='/journals/' render={() => (
             <JournalIndex msgAlert={this.msgAlert} user={user} setJournal={this.setJournal} setUserJournal={this.setUserJournal} />
           )} />
+          <AuthenticatedRoute user={user} path='/journals/:journal.id/' render={() => (
+            <JournalIndex msgAlert={this.msgAlert} user={user} setJournal={this.setJournal} setUserJournal={this.setUserJournal} />
+          )} />
           <AuthenticatedRoute user={user} path='/journals/:journalId/' render={() => (
             <JournalShow msgAlert={this.msgAlert} user={user} showjournal={journal} clearJournal={this.clearJournal} />
           )} />

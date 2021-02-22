@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react'
 
 // Import withRouter to have access to "history"
 import { withRouter, Redirect, Link } from 'react-router-dom'
-// import Button from 'react-bootstrap/Button'
-// import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
 // import Iframe from 'react-iframe'
 // import SpotifyPlayer from 'react-spotify-web-playback'
 import Embed from 'react-music-embed'
@@ -67,12 +67,11 @@ class JournalShow extends Component {
   }
 
   render () {
-    let journalJsx
-    const { deleted } = this.state
-    const { showjournal } = this.props
+    const { deleted, journal } = this.state
+    const { user } = this.props
 
     // if we don't have a journals yet
-    if (!showjournal) {
+    if (!journal) {
       // A Spinner is just a nice loading message we get from react bootstrap
       return (
         <Spinner animation="border" role="status">
@@ -84,35 +83,35 @@ class JournalShow extends Component {
     // if the journals is deleted
     if (deleted) {
       // redirect to the journals index page
-      return <Redirect to="/journals" />
-    } else {
-      // if we have our journal
-      journalJsx = (
-        <Fragment>
-          <h3>Title:{showjournal.title}</h3>
-          <p>Your Entry: {showjournal.content}</p>
-          <p>Feeling:<Embed url = {showjournal.feeling}
-            // styles={{
-            //   bgColor: '#333',
-            //   color: '#fff',
-            //   loaderColor: '#fff',
-            //   sliderColor: '#1cb954',
-            //   savedColor: '#fff',
-            //   trackArtistColor: '#ccc',
-            //   trackNameColor: '#fff'
-            // }}
-          /></p>
-          <button onClick={this.handleDelete}>Delete Journal</button>
-          <button>
-            <Link to={'/journals-edit/'}>Update Journal</Link>
-          </button>
-        </Fragment>
-      )
+      return <Redirect to="/journals/" />
     }
+    const journalJsx = (
+      <div>
+        <Button className='primary' variant="primary" onClick={this.handleDelete}>Delete Journal</Button>
+        <Button>
+          <Link to={'/journals-edit/'}>Update Journal</Link>
+        </Button>
+      </div>
+    )
+
     return (
       <Fragment>
         <h2>Show Journals Page</h2>
-        {deleted ? <Redirect to="/journals/:journalId/"/> : journalJsx}
+        <div className="displayProfile">
+          <Card style={{ width: '18rem' }}>
+            <Card.Body>
+              <Card.Title>
+                <h3>Title:{journal.title}</h3>
+              </Card.Title>
+              <Card.Text>
+                <p>Your Entry: {journal.content}</p>
+                <p>Feeling:<Embed url = {journal.feeling}/></p>
+              </Card.Text>
+              { user.id === journal.owner && journalJsx }
+            </Card.Body>
+          </Card>
+        </div>
+        {/* {deleted ? <Redirect to="/journals/:journalId/"/> : journalJsx} */}
       </Fragment>
     )
   }

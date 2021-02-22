@@ -26,10 +26,11 @@ on smaller viewports remove the border radius
 on smaller viewports remove the border radius
 */
 
-	$bg: #FFFFFF;
+	$bg: #d3aab6;
 	$text: #697a79;
-  $theme-two:#7699f5;
-  $theme: #625de0;
+  $theme-two:#824fc1;
+  $theme: #53d0fb;
+	$color-blue: #2e95aa;
   @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap');
 
@@ -37,9 +38,14 @@ on smaller viewports remove the border radius
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
+
 }
 body {
-	background-size: 300px, 380px, 100%;
+	background: url('https://files.123freevectors.com/wp-content/original/132928-abstract-geometric-purple-and-white-background.jpg'), $bg;
+	background-repeat: no-repeat;
+	height: 100%;
+  background-position: center;
+  background-size: cover;
 	font-family: 'Montserrat', sans-serif;
 	color: $text;
 	display: flex;
@@ -53,12 +59,13 @@ body {
 		width: 100%;
 		height: 100%;
 		pointer-events: none;
-		// background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g transform="scale(0.8 0.8) translate(5 5)"><circle cx="50" cy="50" r="50" fill="%23ffffff22"/></g></svg>'), url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g transform="scale(0.8 0.8) translate(5 5)"><path d="M 0 80 l 100 -80 v 100 z" fill="%23ffffff22"/></g></svg>');" background-repeat: no-repeat;
+		background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g transform="scale(0.8 0.8) translate(5 5)"><circle cx="50" cy="50" r="50" fill="%23ffffff22"/></g></svg>'), url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g transform="scale(0.8 0.8) translate(5 5)"><path d="M 0 80 l 100 -80 v 100 z" fill="%23ffffff22"/></g></svg>');
 		background-position: bottom -150px left -70px, top -120px right -100px;
 		background-size: 300px, 380px;
 	}
 }
 .Home {
+
 	max-width: 800px;
 	width: 90vw;
 	min-height: 600px;
