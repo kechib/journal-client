@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 import './JournalIndex.scss'
 import Card from 'react-bootstrap/Card'
+import CardGroup from 'react-bootstrap/CardGroup'
 import Button from 'react-bootstrap/Button'
 import { indexJournals } from '../../api/journals'
 
@@ -54,42 +55,40 @@ class JournalIndex extends Component {
 
     const journalsJsx = journals.map(journal => (
 
-      <Link to={`/journals/${journal.id}/`} key={journal.id}>
+      <Link to={`/journals-show/${journal.id}/`} key={journal.id}>
+        <Card className="index-card">
+          <div className="index">
 
-        <div className="index">
-
-          <div className="main-content">
-            {/* evry time you click its going to set the user journal to what you click on */}
-            <div className="moleskine-wrapper">
-              <div className="moleskine-notebook">
-                <div className="notebook-cover blue">
-                  <div className="notebook-skin"><Button onClick={() => setJournal(journal)} className="w-100" variant="primary">
-                    {journal.title}
-                  </Button></div>
+            <div className="main-content">
+              {/* evry time you click its going to set the user journal to what you click on */}
+              <div className="moleskine-wrapper">
+                <div className="moleskine-notebook">
+                  <div className="notebook-cover blue">
+                    <div className="notebook-skin"><Button onClick={() => setJournal(journal)} className="w-100" variant="primary">
+                      {journal.title}
+                    </Button></div>
+                  </div>
+                  <div className="notebook-page ruled"></div>
                 </div>
-                <div className="notebook-page ruled"></div>
-              </div>
-
-              <div>
-
-                <h4>{journal.created}</h4>
-
               </div>
             </div>
-
           </div>
-        </div>
+          <Card.Footer>
+            <small className="text-muted">{journal.created}</small>
+          </Card.Footer>
+        </Card>
 
       </Link>
 
     ))
 
     return (
-
-      <Card>
-        <Card.Title><h1>See All Your Journal Entries<small>Hover on any notebook...</small></h1></Card.Title>
-        <Card.Body>{journalsJsx}</Card.Body>
-      </Card>
+      <CardGroup>
+        <Card>
+          <Card.Title className="card-title"><h1>See All Your Journal Entries<small>Hover on any notebook...</small></h1></Card.Title>
+          <Card.Body>{journalsJsx}</Card.Body>
+        </Card>
+      </CardGroup>
 
     )
   }

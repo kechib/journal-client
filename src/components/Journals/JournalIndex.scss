@@ -1,5 +1,7 @@
 $color-blue: #2e95aa;
-
+$theme: #53d0fb;
+$card-hover: #f3609b;
+$primary: #625de0;
 
 body {
   color: #fff;
@@ -116,7 +118,7 @@ h1 {
     height: 15px;
     left: 0;
     bottom: 0;
-    
+
   }
 }
 
@@ -133,4 +135,27 @@ h1 {
     background-size: 100% 10px;
   }
 
+}
+.card-title {
+  color: $theme;
+  text-align: center;
+}
+.index-card:hover {
+  background-color: $card-hover;
+}
+.card-footer {
+        padding: 0.0rem;
+        // background-color: coral;
+        /* border-top: 1px solid rgba(0, 0, 0, 0.125); */
+}
+
+
+.card-footer {
+        color: $primary;
+        padding-bottom: 80px;
+        /* padding: 0.75rem 1.25rem; */
+        /* background-color: rgba(0, 0, 0, 0.03); */
+        /* border-top: 1px solid rgba(0, 0, 0, 0.125); */
+        font-size: 25px;
+        text-align: center;
 }

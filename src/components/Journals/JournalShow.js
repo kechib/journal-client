@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-
+import './ShowJournal.scss'
 // Import withRouter to have access to "history"
 import { withRouter, Redirect, Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
@@ -45,8 +45,8 @@ class JournalShow extends Component {
   }
 
   handleDelete = event => {
-    const { user, msgAlert, clearJournal, showjournal } = this.props
-    const { id } = showjournal
+    const { user, msgAlert, clearJournal, journal } = this.props
+    const { id } = journal
     // make a delete axios request
     deleteJournal(user, id)
       // set the deleted variable to true, to redirect to the journals page in render
@@ -89,8 +89,8 @@ class JournalShow extends Component {
       journalJsx = (
         <Fragment>
           <h2>Show Journals Page</h2>
-          <div className="displayProfile">
-            <Card style={{ width: '18rem' }}>
+          <div className="displayJournal">
+            <Card style={{ width: '25rem' }}>
               <Card.Body>
                 <Card.Title>
                   <h3>Title: {journal.title}</h3>
@@ -113,7 +113,7 @@ class JournalShow extends Component {
     return (
       <Fragment>
         <h2>Show Journals Page</h2>
-        {deleted ? <Redirect to="/journals/:journalId/"/> : journalJsx}
+        {deleted ? <Redirect to="/journals-show/"/> : journalJsx}
       </Fragment>
     )
   }

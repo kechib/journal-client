@@ -26,8 +26,8 @@ export const indexJournals = (user) => {
 }
 
 export const showJournal = (user, journalId) => {
-  // console.log('journalId is ', journalId)
-  // console.log('user.token is ', user.token)
+  console.log('journalId is ', journalId)
+  console.log('user.token is ', user.token)
 
   return axios({
     url: apiUrl + '/journals/' + journalId + '/',

@@ -1,0 +1,16 @@
+$theme-two: #824fc1;
+
+.displayJournal{
+  color: $theme-two;
+}
+a {
+        text-decoration: none;
+        margin: 15px;
+        color: white;
+        text-decoration: none;
+        background-color: transparent;
+        &:hover{
+          text-decoration: none;
+          color: white;
+        }
+}
