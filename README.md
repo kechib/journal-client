@@ -11,6 +11,14 @@ Journal Mia is a music journal web application that allows users to create an ac
 ## Planning Story
 For this project I spent most of my time re-learning react concepts, reviewing previous lessons, notes, and getting each route to work successfully.  Then I implemented the music library feature, I wanted the library to be able to sign you in to apple music and play your picked embedded song in the Show App page. This was the hardest and most challenging feature. Once successfully getting the music library to play music, I styled the application.
 
+## Preparation
+
+1. Fork and clone this repository.
+2. Create a new branch, `example`, for your work.
+3. Checkout to the `example` branch.
+4. Install dependencies with `npm install`.
+5. Start up client with `npm run start`
+
 ## User Stories
 - As a user I want to: Sign Up
 - As a user I want to: Sign In
