@@ -45,10 +45,11 @@ class JournalShow extends Component {
   }
 
   handleDelete = event => {
-    const { user, msgAlert, clearJournal, journal } = this.props
-    const { id } = journal
+    const { user, match, msgAlert, clearJournal } = this.props
+    // const { id } = showjournal
+    // const { journal } = this.state
     // make a delete axios request
-    deleteJournal(user, id)
+    deleteJournal(user, match.params.journalId)
       // set the deleted variable to true, to redirect to the journals page in render
       .then(() => this.setState({ deleted: true }))
       .then(() => msgAlert({
@@ -88,16 +89,21 @@ class JournalShow extends Component {
     } else {
       journalJsx = (
         <Fragment>
-          <h2>Show Journals Page</h2>
           <div className="displayJournal">
-            <Card style={{ width: '25rem' }}>
+            <Card style={{ width: '50rem' }}>
               <Card.Body>
                 <Card.Title>
                   <h3>Title: {journal.title}</h3>
                 </Card.Title>
                 <Card.Text>
-                  <p>Your Entry: {journal.content}</p>
-                  <p>Feeling:<Embed url = {journal.feeling}/></p>
+                  <section>
+                    <h3>Your Journal Entry:<p>{journal.content}</p></h3>
+                  </section>
+                </Card.Text>
+                <Card.Text>
+                  <section>
+                    <h3>Feeling: <Embed url = {journal.feeling}/></h3>
+                  </section>
                 </Card.Text>
                 <Button className='primary' variant="primary" onClick={this.handleDelete}>Delete Journal</Button>
                 <Button>
@@ -113,7 +119,7 @@ class JournalShow extends Component {
     return (
       <Fragment>
         <h2>Show Journals Page</h2>
-        {deleted ? <Redirect to="/journals-show/"/> : journalJsx}
+        {deleted ? <Redirect to="/journals-show/:journalId/"/> : journalJsx}
       </Fragment>
     )
   }
