@@ -22,17 +22,17 @@ class JournalEdit extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log(this.state)
-    console.log(this.props)
-    const { user, match, msgAlert, editjournal } = this.props
+    // console.log(this.state)
+    // console.log(this.props)
+    const { user, msgAlert, editjournal } = this.props
     const { id } = editjournal
     const { journal } = this.state
-    console.log(match.params)
+    // console.log(match.params)
     // create a journal, pass it the journal data and the user for its token
     updateJournal(user, journal, id)
       // set the createdId to the id of the journal we just created
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.setState({ journal: res.data })
         // pass the response to the next .then so we can show the title
         return res
@@ -77,7 +77,7 @@ class JournalEdit extends Component {
       // redirect to the journals show page
       return <Redirect to={`/journals/${journal.id}`} />
     }
-    console.log('this is props', this.props)
+    // console.log('this is props', this.props)
     return (
       <Fragment>
         <h3>Edit Journals</h3>

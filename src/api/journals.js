@@ -2,8 +2,8 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 export const createJournal = (user, journal) => {
-  console.log('journal is', journal)
-  console.log('user is', user)
+  // console.log('journal is', journal)
+  // console.log('user is', user)
   return axios({
     url: apiUrl + '/journals/',
     method: 'POST',
@@ -15,7 +15,7 @@ export const createJournal = (user, journal) => {
 }
 
 export const indexJournals = (user) => {
-  console.log('user.token is ', user.token)
+  // console.log('user.token is ', user.token)
   return axios({
     url: apiUrl + '/journals/',
     method: 'GET',
@@ -26,8 +26,8 @@ export const indexJournals = (user) => {
 }
 
 export const showJournal = (user, journalId) => {
-  console.log('journalId is ', journalId)
-  console.log('user.token is ', user.token)
+  // console.log('journalId is ', journalId)
+  // console.log('user.token is ', user.token)
 
   return axios({
     url: apiUrl + '/journals/' + journalId + '/',
@@ -39,7 +39,7 @@ export const showJournal = (user, journalId) => {
 }
 
 export const updateJournal = (user, journal, id) => {
-  console.log('user is', user)
+  // console.log('user is', user)
   return axios({
     url: apiUrl + '/journals/' + id + '/',
     method: 'PATCH',
