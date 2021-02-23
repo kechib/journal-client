@@ -47,3 +47,6 @@ For this project I spent most of my time re-learning react concepts, reviewing p
 ## User Stories
 ![Sign-in/up](./public/journal-mia-write.png)
 ![Index](./public/journal-mia-index.png)
+
+## Journal Mia Image
+![App Image] (./public/journal-mia-app-image.png)

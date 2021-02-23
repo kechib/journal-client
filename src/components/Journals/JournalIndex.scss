@@ -1,4 +1,5 @@
-$color-blue: #2e95aa;
+$color-violet:
+#af499a;
 $theme: #53d0fb;
 $card-hover: #f3609b;
 $primary: #625de0;
@@ -83,19 +84,19 @@ h1 {
 
 .notebook-cover {
   &.blue {
-    background: $color-blue;
+    background: $color-violet;
     &:before {
       background: linear-gradient(
       to right,
-      darken($color-blue, 15%) 0%,
-      $color-blue 12%,
-      darken($color-blue, 15%) 25%,
-      $color-blue 37%,
-      darken($color-blue, 15%) 50%,
-      $color-blue 62%,
-      darken($color-blue, 15%) 75%,
-      $color-blue 87%,
-      darken($color-blue, 15%) 100%);
+      darken($color-violet, 15%) 0%,
+      $color-violet 12%,
+      darken($color-violet, 15%) 25%,
+      $color-violet 37%,
+      darken($color-violet, 15%) 50%,
+      $color-violet 62%,
+      darken($color-violet, 15%) 75%,
+      $color-violet 87%,
+      darken($color-violet, 15%) 100%);
     }
   }
 }
@@ -137,12 +138,10 @@ h1 {
 
 }
 .card-title {
-  color: $theme;
+  color: $primary;
   text-align: center;
 }
-.index-card:hover {
-  background-color: $card-hover;
-}
+
 .card-footer {
         padding: 0.0rem;
         // background-color: coral;
