@@ -39,9 +39,10 @@ const JournalForm = ({ journal, createdDate, handleSubmit, handleChange, handleT
     <Form.Group>
       <Form.Label>Created</Form.Label>
       <Form.Control
-        placeholder="MM/dd/yyyy"
+        placeholder="YYYY/DD/MM"
         // This name should line up with the state we want to change
         name='created'
+        type= 'date'
         value={journal.created}
         onChange={handleChange}
         // selected={createdDate}

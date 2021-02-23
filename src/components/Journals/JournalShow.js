@@ -105,6 +105,9 @@ class JournalShow extends Component {
                     <h3>Feeling: <Embed url = {journal.feeling}/></h3>
                   </section>
                 </Card.Text>
+                <Card.Text>
+                  <h3>Created: {journal.created}</h3>
+                </Card.Text>
                 <Button className='primary' variant="primary" onClick={this.handleDelete}>Delete Journal</Button>
                 <Button>
                   <Link to={'/journals-edit/'}>Update Journal</Link>
