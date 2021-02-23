@@ -55,7 +55,7 @@ class JournalIndex extends Component {
 
     const journalsJsx = journals.map(journal => (
 
-      <Link to={`/journals-show/${journal.id}/`} key={journal.id}>
+      <Link onClick={() => setJournal(journal)} to={`/journals-show/${journal.id}/`} key={journal.id}>
         <Card className="index-card">
           <div className="index">
 
@@ -64,7 +64,7 @@ class JournalIndex extends Component {
               <div className="moleskine-wrapper">
                 <div className="moleskine-notebook">
                   <div className="notebook-cover blue">
-                    <div className="notebook-skin"><Button onClick={() => setJournal(journal)} className="w-100" variant="primary">
+                    <div className="notebook-skin"><Button className="w-100" variant="primary">
                       {journal.title}
                     </Button></div>
                   </div>

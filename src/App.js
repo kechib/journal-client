@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
+import './App.scss'
 
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
@@ -70,7 +71,7 @@ clearJournal = () => this.setState({ journal: null })
         ))}
         <main className="container">
           <Route path='/home' render={() => (
-            <Home msgAlert={this.msgAlert} setUser={this.setUser} />
+            <Home msgAlert={this.msgAlert} user={user} setUser={this.setUser} setJournal={this.setJournal} setUserJournal={this.setUserJournal} />
           )} />
           <Route path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
@@ -92,7 +93,7 @@ clearJournal = () => this.setState({ journal: null })
             <JournalIndex msgAlert={this.msgAlert} user={user} setJournal={this.setJournal} setUserJournal={this.setUserJournal} />
           )} />
           <AuthenticatedRoute user={user} path='/journals-show/:journalId' render={() => (
-            <JournalShow msgAlert={this.msgAlert} user={user} showjournal={journal} clearJournal={this.clearJournal} />
+            <JournalShow msgAlert={this.msgAlert} user={user} setUserJournal={this.setUserJournal} clearJournal={this.clearJournal} />
           )} />
           <AuthenticatedRoute user={user} path="/journals-edit/" render={() => (
             <JournalEdit msgAlert={this.msgAlert} user={user} editjournal={journal} setUserJournal={this.setUserJournal}/>
