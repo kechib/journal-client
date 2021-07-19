@@ -43,11 +43,14 @@ on smaller viewports remove the border radius
 
 }
 body {
-	background: url('https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm251-mind-01_1.jpg?w=1000&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=1db514f2d9ac09cf5c95de83d97546cf'), $bg  no-repeat center center fixed;
+	background: url('https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm251-mind-01_1.jpg?w=1000&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=1db514f2d9ac09cf5c95de83d97546cf') no-repeat center center fixed;
 	// background-repeat: no-repeat;
 	// height: 100vh;
   // background-position: center;
   background-size: cover;
+	-webkit-background-size: cover;
+	 -moz-background-size: cover;
+	 -o-background-size: cover;
 	font-family: 'Montserrat', sans-serif;
 	// color: $text;
 	// display: flex;

@@ -70,7 +70,7 @@ clearJournal = () => this.setState({ journal: null })
           />
         ))}
         <main className="container">
-          <Route exact path='/home' render={() => (
+          <Route exact path='/' render={() => (
             <Home msgAlert={this.msgAlert} user={user} setUser={this.setUser} setJournal={this.setJournal} setUserJournal={this.setUserJournal} />
           )} />
           <Route path='/sign-up' render={() => (

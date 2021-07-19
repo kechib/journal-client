@@ -1,13 +1,15 @@
 import React, { Fragment } from 'react'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
+import ListGroup from 'react-bootstrap/ListGroup'
+import BootstrapCarousel from './Carousel.js'
 const Home = ({ user }) => {
-  const headingStyle = {
-    border: '10px solid white',
-    backgroundColor: '#af499a',
-    width: '800px'
-    // padding: '50px 0'
-  }
+  // const headingStyle = {
+  //   border: '10px solid white',
+  //   backgroundColor: '#af499a',
+  //   width: '800px'
+  //   // padding: '50px 0'
+  // }
 
   const bodyStyle = {
     color: '#FFFF',
@@ -32,13 +34,25 @@ const Home = ({ user }) => {
 
   const authorizedJsx = (
     <Fragment>
-      <div className="col-12 col-lg-4 col-md-4 col-sm-12">
+      <BootstrapCarousel></BootstrapCarousel>
+      <ListGroup horizontal>
+        <ListGroup.Item disabled>How to Grab a Link From Apple Music</ListGroup.Item>
+        <ListGroup.Item variant="info"> Step One: Go To Apple Music</ListGroup.Item>
+        <ListGroup.Item variant="info"> Step Two: Search For Your Artist!</ListGroup.Item>
+        <ListGroup.Item variant="info">Step Three: Go to the Menu of Your Song Choice</ListGroup.Item>
+        <ListGroup.Item variant="info">Step Four: Scroll To Share, Then Select Copy Link!</ListGroup.Item>
+        <ListGroup.Item variant="info">Step Five: Add Your Link to the Feelings Section of `Create Your Journal Entries`!</ListGroup.Item>
+        <ListGroup.Item variant="info">Step Six: View Your Entry And Listen To Your Tune!</ListGroup.Item>
+        <Button href="https://music.apple.com/us/browse" target="_blank">Start Here!</Button>
+      </ListGroup>
+
+      { /*   <div className="col-12 col-lg-4 col-md-4 col-sm-12">
         <div className="box" style={headingStyle}>
           <h2>Welcome To JournalMia</h2>
           <h3>Information About this site</h3>
           <p className="text-center">Journal Mia is an online Journal where you write your personal journal entries about whatever you want. Describe your feelings in songs grabbing an embedded link from Apple Music!</p>
           <section><h2>How to Grab an embedded Link From Apple Music</h2>
-            <ul><li>1: Go To Apple Music, In a new tab, go to <span className='link'>`https://music.apple.com/us/browse`</span> ,or The Apple Music App, <span className='link'>`https://www.apple.com/apple-music/`</span></li>
+            <ul><li>1: Go To Apple Music, In a new tab, go to <span className='link'>`https://music.apple.com/us/browse`</span></li>
               <li>2: Search For the sing of your choice!</li>
               <li>3: Go to the song options and look for the <span>`share`</span> option</li>
               <li>4: Select the <span>`copy link` option</span></li>
@@ -47,7 +61,7 @@ const Home = ({ user }) => {
             </ul></section>
         </div>
       </div>
-      { /*   // <div className="col-12 col-lg-8 col-md-8 col-sm-12">
+        // <div className="col-12 col-lg-8 col-md-8 col-sm-12">
       //   <div className="box">
       //     <h3 className="text-center" >Come Chat With Oi App</h3>
       //   </div>
